@@ -28,6 +28,19 @@ const theme = createTheme({
   shape: {
     borderRadius: 8,
   },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#0d47a1',
+        },
+        h5: {
+          color: '#0d47a1',
+          fontWeight: 700,
+        },
+      },
+    },
+  },
 });
 
 export default theme;

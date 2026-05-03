@@ -15,7 +15,6 @@ const Landing = () => {
         }}
       >
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          {/* Centered Icon for a professional touch */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
             <ShieldCheck size={48} color="#1976d2" />
           </Box>
@@ -42,32 +41,50 @@ const Landing = () => {
           </Typography>
         </Box>
 
-        <Stack
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={3}
-          justifyContent="center"
-          lignItems="center"
-          sx={{ mt: 2 }}
-        >
-          <Button
-            component={RouterLink}
-            to="/auth?mode=login"
-            variant="contained"
-            size="large"
-            sx={{ px: 4, py: 1.5, borderRadius: 2, textTransform: 'none', fontSize: '1.1rem' }}
+        {/* Centering Wrapper */}
+        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mt: 4 }}>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={3}
+            sx={{
+              width: { xs: '100%', sm: 'auto' },
+              alignItems: 'center',
+            }}
           >
-            Login
-          </Button>
-          <Button
-            component={RouterLink}
-            to="/auth?mode=register"
-            variant="outlined"
-            size="large"
-            sx={{ px: 4, py: 1.5, borderRadius: 2, textTransform: 'none', fontSize: '1.1rem' }}
-          >
-            Register
-          </Button>
-        </Stack>
+            <Button
+              component={RouterLink}
+              to="/auth?mode=login"
+              variant="contained"
+              size="large"
+              sx={{
+                px: 6,
+                py: 1.5,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontSize: '1.1rem',
+                minWidth: '160px',
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/auth?mode=register"
+              variant="outlined"
+              size="large"
+              sx={{
+                px: 6,
+                py: 1.5,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontSize: '1.1rem',
+                minWidth: '160px',
+              }}
+            >
+              Register
+            </Button>
+          </Stack>
+        </Box>
       </Paper>
     </Container>
   );
