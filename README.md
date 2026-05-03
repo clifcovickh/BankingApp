@@ -5,27 +5,29 @@
 - **Backend:** Node.js (MVC Architecture)
 - **Validation:** Zod (Schema-based validation)
 - **Database:** PostgreSQL (Relational data & ACID compliance)
-- **API Testing:** Postman (Environment-based collections)
+- **API Testing:** Postman 
+- **API Documentation:** Swagger
 - **Version Control:** GitLab
 
 ---
 
 ## System Architecture
 
-### Database Schema (Sprint 1)
+### Database Schema 
 The system uses a relational PostgreSQL structure to ensure data integrity:
 - `customer`: Stores basic user identity.
 - `deposito_type`: Reference table for interest rates (Bronze, Silver, Gold, and/or future deposito types).
 - `account`: Links customers to a specific deposit plan, also holds the current balance.
 - `transaction`: Immutable log of all `DEPOSIT` and `WITHDRAW` actions.
+- `request`: Stores user request for account/customer deletion.
 
 ### Use Case Diagram
-- **Customer:** Can open accounts, deposit funds, and withdraw funds with automated interest calculation.
-- **Admin:** Manage customer records and adjust interest rates in the `deposito_types` table.
+- **Customer:** Can open accounts, deposit funds, and withdraw funds with automated interest calculation, and request account/customer deletion.
+- **Admin:** Manage customer records and adjust interest rates in the `deposito_types` table, edit/delete customer and accounts, approve requests.
 
 ---
 
-## Error Handling & Edge Cases (Requirement 3)
+## Error Handling & Edge Cases 
 
 ### 1. Technical Validation (Zod Schema)
 | Scenario | Action | HTTP Code |
