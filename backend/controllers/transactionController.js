@@ -2,25 +2,13 @@ const { Transaction, Account, DepositoType } = require('../models/index');
 
 const { transactionSchema } = require('../middleware/validators');
 
-/**
-
- * Handles Deposits and Withdrawals
-
- * Includes Interest Calculation for Withdrawals based on the selected deposito type's yearly return
-
- */
-
 exports.handleTransaction = async (req, res) => {
   try {
-    const { account_id, type, action_type, amount, transaction_date } = req.body;
-
-    const transactionType = action_type || type;
+    const { account_id, type, amount, transaction_date } = req.body;
 
     const data = transactionSchema.parse({
-      action_type: transactionType,
-
+      action_type: type,
       amount,
-
       transaction_date,
     });
 
@@ -38,7 +26,7 @@ exports.handleTransaction = async (req, res) => {
 
     let interestEarned = 0;
 
-    if (transactionType === 'WITHDRAW') {
+    if (type === 'WITHDRAW') {
       if (account.balance < amount) {
         return res.status(400).json({ message: 'Insufficient balance' });
       }
@@ -66,7 +54,7 @@ exports.handleTransaction = async (req, res) => {
       finalAmount = amount + interestEarned;
 
       account.balance -= amount;
-    } else if (transactionType === 'DEPOSIT') {
+    } else if (type === 'DEPOSIT') {
       account.balance += amount;
     } else {
       return res.status(400).json({ message: 'Invalid transaction type' });
@@ -77,15 +65,15 @@ exports.handleTransaction = async (req, res) => {
     const transaction = await Transaction.create({
       account_id,
 
-      action_type: transactionType,
+      action_type: type,
 
-      amount: transactionType === 'WITHDRAW' ? finalAmount : amount,
+      amount: type === 'WITHDRAW' ? finalAmount : amount,
 
       transaction_date: effectiveDate,
     });
 
     res.status(201).json({
-      message: `${transactionType} successful`,
+      message: `${type} successful`,
 
       data: {
         transaction_id: transaction.id,
